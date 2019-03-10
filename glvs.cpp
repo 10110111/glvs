@@ -14,7 +14,7 @@
 
 // Microsoft Visual C++ POSIX Warning Workarounds
 #if defined (_MSC_VER)
-# define stricmp _stricmp
+# define strcasecmp _stricmp
 #endif
 
 using namespace rapidxml;
@@ -48,7 +48,7 @@ xml_node<>* find_next_enum (xml_node<>* enum_node)
   xml_node<>* enum_entry = enum_node->next_sibling ("enum");
   while (enum_entry != NULL) {
     // Case insensitive since we are really comparing hexadecimal numbers (e.g. 0xF00D vs 0xf00d) and not strings
-    if (! stricmp (enum_entry->first_attribute ("value")->value (), enum_node->first_attribute ("value")->value ())) {
+    if (! strcasecmp (enum_entry->first_attribute ("value")->value (), enum_node->first_attribute ("value")->value ())) {
       return enum_entry;
     }
     enum_entry = enum_entry->next_sibling ("enum");
